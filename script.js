@@ -6,7 +6,8 @@ const opArray = ["+", "-", "*", "/", "^"];
 const parensArray = ["(", ")"]
 let expression = '';
 let userInputArr = [];
-let currNum = ''
+let currNum = '';
+
 
 //click on calc
 enterbtn.addEventListener('click', () => {
@@ -16,6 +17,13 @@ enterbtn.addEventListener('click', () => {
 //keydown for enter
 window.addEventListener('keydown', (e) => {
     if(e.key === "Enter"){
+        if(currNum !== ''){
+            userInputArr.push(currNum);
+            currNum = '';
+        }
+        if(opArray.includes(userInputArr[userInputArr.length - 1])){
+            return;
+        }
     }
 })
 
@@ -27,7 +35,6 @@ window.addEventListener('keydown', (e) => {
         }
         currNum += e.key;
         displayDiv.textContent += `${e.key}`;
-        userInputArr.push(currNum);
     }
 })
 
@@ -37,6 +44,7 @@ window.addEventListener('keydown', (e) => {
         if(userInputArr[userInputArr.length -1] === ("+" || "-" || "*" || "/" || "^" || "(")){
             return;
         }
+        userInputArr.push(currNum);
         userInputArr.push(e.key)
         currNum = '';
         displayDiv.textContent += ` ${e.key} `;
@@ -159,6 +167,11 @@ const checkArrForAddAndSub = () => {
         }
     }
 }
+
+//stricktly for testing purposes.
+window.addEventListener('keydown', (e) => {
+    console.log(userInputArr);
+})
 
 // userInputArr = ["1", "+", "30", "/", "3", "*", "4"];
 // userInputArr = ["1", "*", "2", "*", "3"];
