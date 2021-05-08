@@ -1,0 +1,45 @@
+* {
+	background: #333;
+}
+
+.displayExp {
+	display: flex;
+	font-size: 1.5rem;
+	margin: auto;
+	width: 90%;
+	margin-top: 50%;
+	height: 3rem;
+	background: rgb(129, 126, 126);
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	align-content: flex-end;
+	justify-content: flex-end;
+}
+
+.displayResult {
+	display: flex;
+	font-size: 1.5rem;
+	margin: auto;
+	width: 90%;
+	height: 3rem;
+	align-content: flex-end;
+	justify-content: flex-end;
+	background: rgb(129, 126, 126);
+	color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+button {
+	display: flex;
+	margin: auto;
+	margin-top: 5%;
+	height: 3rem;
+	max-width: fit-content;
+	text-align: center;
+	font-size: 1.5rem;
+	align-items: center;
+	justify-content: center;
+	color: rgb(214, 208, 214);
+}
