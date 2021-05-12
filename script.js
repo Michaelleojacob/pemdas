@@ -39,10 +39,13 @@ window.addEventListener('keydown', (e) => {
             return;
         }
 
+        //not comparing exponents to anything, just running it first:
+        //which is why it's not "check"exponents.
+        exponents();
         checkArrForMultAndDiv();
         checkArrForAddAndSub();
 
-        let result = userInputArr;
+        result = userInputArr;
         displayResult.textContent = result;
         userInputArr = [];
         return result;
@@ -216,6 +219,13 @@ const runOperand = (op) => {
     userInputArr[opIndex - 1] = result;
     userInputArr.splice(opIndex, 2);
     console.log(userInputArr);
+}
+
+//exponents logic
+const exponents = () => {
+    if(userInputArr.includes("^")){
+        runOperand("^");
+    }
 }
 
 //mult and div logic
