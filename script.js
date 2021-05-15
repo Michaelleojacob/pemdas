@@ -25,11 +25,13 @@ window.addEventListener("keydown", (e) => {
 
 //click button calc
 enterbtn.addEventListener('click', () => {
-    console.log('hello');
 })
 
 //enter
 window.addEventListener('keydown', (e) => {
+
+    makeSureParensAreBalanced(userInputArr);
+
     if(e.key === "Enter"){
         if(currNum !== ''){
             userInputArr.push(currNum);
@@ -41,9 +43,10 @@ window.addEventListener('keydown', (e) => {
 
         //not comparing exponents to anything, just running it first:
         //which is why it's not "check"exponents.
-        exponents();
-        checkArrForMultAndDiv();
-        checkArrForAddAndSub();
+        checkArrForParens(userInputArr);
+        exponents(userInputArr);
+        checkArrForMultAndDiv(userInputArr);
+        checkArrForAddAndSub(userInputArr);
 
         result = userInputArr;
         displayResult.textContent = result;
@@ -68,7 +71,6 @@ window.addEventListener('keydown', (e) => {
 
 //sets currNum as last item in Arr. (userInputArr)
 const checkCurrNumIsSetLastItemOfArr = () => {
-    console.log(userInputArr[userInputArr.length - 1]);
     if(userInputArr.length > 0){
         if(userInputArr[userInputArr.length - 1] === "*"){
             return;
@@ -83,6 +85,12 @@ const checkCurrNumIsSetLastItemOfArr = () => {
             return;
         }
         else if(userInputArr[userInputArr.length - 1] === "^"){
+            return;
+        }
+        else if(userInputArr[userInputArr.length - 1] === ")"){
+            return;
+        }
+        else if(userInputArr[userInputArr.length - 1] === "("){
             return;
         }
         else if(userInputArr[userInputArr.length - 1] === ""){
@@ -110,9 +118,24 @@ window.addEventListener('keydown', (e) => {
 
 //parens ( ) - user input
 window.addEventListener('keydown', (e) => {
-    if(parensArray.includes(e.key)){
-        userInputArr.push(e.key);
-        displayDiv.textContent += ` ${e.key} `;
+if(parensArray.includes(e.key)){
+    if(currNum !== ''){
+        userInputArr.push(currNum);
+        currNum = '';
+    }
+
+    if(userInputArr.length === 0 && e.key === ")"){
+        return;
+    }
+    
+    if(userInputArr.length > 0 && e.key === "("){
+        if(userInputArr[userInputArr.length -1] !== ("+" || "-" || "*" || "/" || "^")){
+            userInputArr.push("*");
+        }
+    }
+    currNum = '';
+    userInputArr.push(e.key);
+    displayDiv.textContent += ` ${e.key} `;
     }
 })
 
@@ -153,8 +176,8 @@ window.addEventListener('keydown', (e) => {
 
 //logic for a op b
 const compute = (num1, op, num2) => {
-    num1 = parseInt(num1);
-    num2 = parseInt(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     if(op === "+"){
         result = num1 + num2;
         return result;
@@ -178,62 +201,109 @@ const compute = (num1, op, num2) => {
 }
 
 //Will find first item left to right Mult/Div or Add/Sub
-const multDivOrAddSub = (op1, op2) => {
+const multDivOrAddSub = (x, op1, op2) => {
     //check if userArr contains either multilply/divide OR add/sub
-    if(!userInputArr.includes(op1) && !userInputArr.includes(op2)){
+    if(!x.includes(op1) && !x.includes(op2)){
         return;
     }
 
     //if this function does not find one of the arguments, but does find the other arg
     //run the other arg
-    if(!userInputArr.includes(op1) && userInputArr.includes(op2)){
-        return runOperand(op2)
+    if(!x.includes(op1) && x.includes(op2)){
+        return runOperand(x,op2)
     }
     //see above
-    if(userInputArr.includes(op1) && !userInputArr.includes(op2)){
-        return runOperand(op1)
+    if(x.includes(op1) && !x.includes(op2)){
+        return runOperand(x, op1)
     }
 
     //goes through left to right: mult/div and add/sub by their index
-    let item1 = userInputArr.indexOf(op1);
-    let item2 = userInputArr.indexOf(op2);
+    let item1 = x.indexOf(op1);
+    let item2 = x.indexOf(op2);
     if(item1 < item2){
-        runOperand(op1)
+        return runOperand(x, op1)
     }
     else {
-        runOperand(op2)
+        return runOperand(x, op2)
     }
 }
 
 //logic to run compute on any operand. +,-,*,/
-const runOperand = (op) => {
-    if(!userInputArr.includes(op)){
+const runOperand = (x, op) => {
+    if(!x.includes(op)){
         return;
     };
-    let opIndex = userInputArr.indexOf(op);
-    let a = userInputArr[opIndex - 1];
-    a = parseInt(a);
-    let b = userInputArr[opIndex + 1];
-    b = parseInt(b);
+    let opIndex = x.indexOf(op);
+    let a = x[opIndex - 1];
+    a = parseFloat(a);
+    let b = x[opIndex + 1];
+    b = parseFloat(b);
     compute(a, op, b);
-    userInputArr[opIndex - 1] = result;
-    userInputArr.splice(opIndex, 2);
-    console.log(userInputArr);
+    x[opIndex - 1] = result;
+    x.splice(opIndex, 2);
+}
+
+//parens // split by parens
+const chunkArrByParens = (x) => {
+    for(let i=0; i<x.length; i++){
+    }
+    
+    let firstClosingBracket = x.indexOf(")");
+    
+    let highestIndex = 0;
+    
+    for(let i=0; i<firstClosingBracket; i++){
+        if(x[i] === "("){
+            highestIndex = i;
+        }
+    }
+    
+    let myArr = x.map(x => x);
+    
+    let arr2 = myArr.slice(highestIndex + 1, firstClosingBracket);
+    
+    if(arr2.length === 1){
+        x.splice(firstClosingBracket, 1);
+        x.splice(highestIndex, 1);
+    }
+    
+    if(arr2.length > 1){
+        x.splice(highestIndex + 1, 1)
+        let arr2Len = arr2.length;
+        exponents(arr2);
+        checkArrForMultAndDiv(arr2);
+        checkArrForAddAndSub(arr2);
+        x[highestIndex] = result;
+        x.splice(highestIndex + 1, arr2Len);
+    }
+}
+
+//parens === true/false
+const checkArrForParens = (x) => {
+    if(x.includes("(") && x.includes(")")){
+        chunkArrByParens(x)
+        if(x.includes("(") && x.includes(")")){
+            return checkArrForParens(x);
+        }
+    }
+    else{
+        return;
+    }
 }
 
 //exponents logic
-const exponents = () => {
-    if(userInputArr.includes("^")){
-        runOperand("^");
+const exponents = (x) => {
+    if(x.includes("^")){
+        runOperand(x, "^");
     }
 }
 
 //mult and div logic
-const checkArrForMultAndDiv = () => {
-    if(userInputArr.includes("*") || userInputArr.includes("/")){
-        multDivOrAddSub("*", "/");
-        if(userInputArr.includes("*") || userInputArr.includes("/")){
-            return checkArrForMultAndDiv();
+const checkArrForMultAndDiv = (x) => {
+    if(x.includes("*") || x.includes("/")){
+        multDivOrAddSub(x, "*", "/");
+        if(x.includes("*") || x.includes("/")){
+            return checkArrForMultAndDiv(x);
         }
         else{
             return;
@@ -242,11 +312,11 @@ const checkArrForMultAndDiv = () => {
 }
 
 //add and sub logic
-const checkArrForAddAndSub = () => {
-    if(userInputArr.includes("+") || userInputArr.includes("-")){
-        multDivOrAddSub("+", "-");
-        if(userInputArr.includes("+") || userInputArr.includes("-")){
-            return checkArrForAddAndSub();
+const checkArrForAddAndSub = (x) => {
+    if(x.includes("+") || x.includes("-")){
+        multDivOrAddSub(x, "+", "-");
+        if(x.includes("+") || x.includes("-")){
+            return checkArrForAddAndSub(x);
         }
         else{
             return;
@@ -254,13 +324,7 @@ const checkArrForAddAndSub = () => {
     }
 }
 
-//stricktly for testing purposes.
-window.addEventListener('keydown', (e) => {
-    console.log(userInputArr);
-    console.log(currNum);
-})
-
-//name
+//is curr empty
 const currNumCheckIfEmpty = () => {
     if(currNum !== ''){
         userInputArr.push(currNum);
@@ -268,9 +332,21 @@ const currNumCheckIfEmpty = () => {
     }
 }
 
-// userInputArr = ["1", "+", "(", "", "3", "*", "4"];
-// userInputArr = ["1", "+", "30", "/", "3", "*", "4"];
-// displayDiv.textContent = userInputArr;
-// userInputArr = ["1", "*", "2", "*", "3"];
-// console.log(userInputArr);
+// balanced parens check
+const makeSureParensAreBalanced = (x) => {
+    let openBracketCount = 0;
+    let closingBracketCount = 0;
+    for(let i=0; i<x.length; i++){
+    if(x[i] === "("){
+        openBracketCount++;
+    }
+    if(x[i] === ")"){
+        closingBracketCount++;
+    }
+    }
+    if(openBracketCount !== closingBracketCount){
+    }
 
+    if(openBracketCount === closingBracketCount){
+    }
+}
