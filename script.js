@@ -24,7 +24,28 @@ window.addEventListener("keydown", (e) => {
 })
 
 //click button calc
-enterbtn.addEventListener('click', () => {
+enterbtn.addEventListener('click', (e) => {
+    makeSureParensAreBalanced(userInputArr);
+
+        if(currNum !== ''){
+            userInputArr.push(currNum);
+            currNum = '';
+        }
+        if(opArray.includes(userInputArr[userInputArr.length - 1])){
+            return;
+        }
+
+        //not comparing exponents to anything, just running it first:
+        //which is why it's not "check"exponents.
+        checkArrForParens(userInputArr);
+        exponents(userInputArr);
+        checkArrForMultAndDiv(userInputArr);
+        checkArrForAddAndSub(userInputArr);
+
+        result = userInputArr;
+        displayResult.textContent = result;
+        userInputArr = [];
+        return result;
 })
 
 //enter

@@ -2,16 +2,24 @@
 	background: #333;
 }
 
+.container {
+	margin-top: 5%;
+}
+
 .displayExp {
 	display: flex;
-	padding: 1em;
+	box-sizing: border-box;
+	min-height: 2rem;
 	font-size: 1.2rem;
-	direction: ltr;
-	margin-top: 10vh;
-	width: 90vw;
-	margin: auto;
-	text-align: end;
+	align-content: center;
+	align-items: center;
 	justify-content: flex-end;
+	text-align: end;
+	justify-items: center;
+	direction: ltr;
+	width: 80vw;
+	margin: auto;
+	padding-right: 5px;
 	word-break: break-word;
 	white-space: pre-line;
 	overflow-wrap: break-word;
@@ -23,17 +31,22 @@
 	hyphens: auto;
 	background: rgb(129, 126, 126);
 	color: white;
-	margin-top: 5vh;
 }
 
 .displayResult {
 	display: flex;
-	padding: 1em;
+	box-sizing: border-box;
+	min-height: 2rem;
 	font-size: 1.2rem;
-	direction: ltr;
-	width: 90vw;
-	margin: auto;
+	align-content: center;
+	align-items: center;
+	justify-content: flex-end;
 	text-align: end;
+	justify-items: center;
+	direction: ltr;
+	width: 80vw;
+	margin: auto;
+	padding-right: 5px;
 	word-break: break-word;
 	white-space: pre-line;
 	overflow-wrap: break-word;

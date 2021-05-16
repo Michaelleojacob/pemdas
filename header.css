@@ -21,12 +21,16 @@ a:active {
 header {
 	display: flex;
 	height: 1.5rem;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 60vh;
 	font-size: 1.5rem;
-	justify-content: space-evenly;
-	margin: 2%;
+	justify-content: center;
+	align-content: center;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.foo {
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
 input,
