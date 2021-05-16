@@ -6,7 +6,7 @@
 
 # High Priority on:<br>Simple and sleek design<br>Mobile first focus<br>Dark mode
 
-# Highlight features:<br>The logic itself way the primary challenge of this exercise. Working on parentheses was probably the toughest logic challenge I have faced in my coding career as of working on this project
+# Highlight features:<br>The logic itself way the primary challenge of this exercise. Working on parentheses was probably the toughest logic challenge I have faced in my coding career as of working on this project.
 
 # Future additions:<br>Fixing any bugs if any exist and are brought to my attention<br>Better error handling.
 
