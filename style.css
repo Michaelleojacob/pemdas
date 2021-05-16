@@ -4,31 +4,46 @@
 
 .displayExp {
 	display: flex;
-	font-size: 1.5rem;
+	padding: 1em;
+	font-size: 1.2rem;
+	direction: ltr;
+	margin-top: 10vh;
+	width: 90vw;
 	margin: auto;
-	width: 90%;
-	margin-top: 50%;
-	height: 3rem;
+	text-align: end;
+	justify-content: flex-end;
+	word-break: break-word;
+	white-space: pre-line;
+	overflow-wrap: break-word;
+	-ms-word-break: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
 	background: rgb(129, 126, 126);
 	color: white;
-	padding-left: 5px;
-	padding-right: 5px;
-	align-content: flex-end;
-	justify-content: flex-end;
 }
 
 .displayResult {
 	display: flex;
-	font-size: 1.5rem;
+	padding: 1em;
+	font-size: 1.2rem;
+	direction: ltr;
+	width: 90vw;
 	margin: auto;
-	width: 90%;
-	height: 3rem;
-	align-content: flex-end;
-	justify-content: flex-end;
+	text-align: end;
+	word-break: break-word;
+	white-space: pre-line;
+	overflow-wrap: break-word;
+	-ms-word-break: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
 	background: rgb(129, 126, 126);
 	color: white;
-	padding-left: 5px;
-	padding-right: 5px;
 }
 
 button {

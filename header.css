@@ -1,0 +1,101 @@
+a {
+	color: rgba(255, 255, 255, 0.829);
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+header {
+	display: flex;
+	height: 1.5rem;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 60vh;
+	font-size: 1.5rem;
+	justify-content: space-evenly;
+	margin-top: 3%;
+	margin-bottom: 10vh;
+}
+
+input,
+input:focus,
+textarea:focus,
+select:focus {
+	border: none;
+	background-image: none;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	outline: none;
+	height: 1.5rem;
+	font-size: 1.5rem;
+	color: rgba(255, 255, 255, 0.829);
+}
+
+#email {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	height: 1.5rem;
+	width: 50%;
+	max-width: max-content;
+	font-size: 1.5rem;
+	justify-content: center;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+}
+
+.mytooltip::before,
+.mytooltip::after {
+	--scale: 0;
+	--arrow-size: 20px;
+	--tooltip-color: rgb(119, 114, 114);
+	/* --translate-y: 100%, 0; */
+	position: absolute;
+	top: -0.25rem;
+	left: 50%;
+	transform: translateX(-50%) translateY(var(--translate-y, 0))
+		scale(var(--scale));
+	transition: 150ms transform;
+	transform-origin: top center;
+}
+
+.mytooltip::before {
+	--translate-y: calc(100% + var(--arrow-size));
+	content: attr(data-tooltip);
+	border-radius: 0.3rem;
+	padding: 0.3rem;
+	text-align: center;
+	width: max-content;
+	max-width: 100%;
+	background: var(--tooltip-color);
+}
+
+.mytooltip:hover::before,
+.mytooltip:hover::after {
+	--scale: 1;
+}
+
+.mytooltip::after {
+	--translate-y: calc(1 * var(--arrow-size));
+	content: '';
+	border: var(--arrow-size) solid transparent;
+	border-bottom-color: var(--tooltip-color);
+	transform-origin: bottom center;
+}

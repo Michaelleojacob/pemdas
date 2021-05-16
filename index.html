@@ -5,14 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pemdas</title>
+    <link rel="stylesheet" href="./noDefaultStyle.css">
+    <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
-    <div class="displayExp"></div>
-    <div class="displayResult"></div>
-    <button class="enterbtn">calculate</button>
+    <div class="mytooltip" data-tooltip="click to copy" id="email">
+        <input type="text" value="michaelleojacob@gmail.com" id="copyemail" readonly="readonly">
+    </div>
+    <header>
+        <a href="https://github.com/Michaelleojacob" target="_blank">github</a>
+        <a href="https://www.linkedin.com/in/michael-jacob-a3a90187/" target="_blank">linkedin</a>
+        <a href="https://github.com/Michaelleojacob/calculator" target="_blank">repository</a>
+    </header>
+
+    <container>
+        <div class="displayExp"></div>
+        <div class="displayResult"></div>
+        <button class="enterbtn">calculate</button>
+    </container>
     
+    <script src="./clickToCopy.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>
