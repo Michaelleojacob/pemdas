@@ -43,8 +43,13 @@ enterbtn.addEventListener('click', (e) => {
         checkArrForAddAndSub(userInputArr);
 
         result = userInputArr;
-        displayResult.textContent = result;
         userInputArr = [];
+        if(result.length > 1 || result === "NaN"){
+            result = 'error'
+            displayResult.textContent = result;
+            return;
+        }
+        displayResult.textContent = result;
         return result;
 })
 
@@ -70,8 +75,13 @@ window.addEventListener('keydown', (e) => {
         checkArrForAddAndSub(userInputArr);
 
         result = userInputArr;
-        displayResult.textContent = result;
         userInputArr = [];
+        if(result.length > 1 || result === "NaN"){
+            result = 'error'
+            displayResult.textContent = result;
+            return;
+        }
+        displayResult.textContent = result;
         return result;
     }
 })
@@ -371,3 +381,4 @@ const makeSureParensAreBalanced = (x) => {
     if(openBracketCount === closingBracketCount){
     }
 }
+
